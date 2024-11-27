@@ -14,6 +14,16 @@ y = df.DomainID
 X_train, X_test, y_train, y_test = train_test_split(X, y)
 
 model = Sequential()
+model.add(Input(shape=(2,)))
+model.add(Dense(100, activation="sigmoid"))
+model.add(Dense(100, activation="sigmoid"))
+model.add(Dense(100, activation="sigmoid"))
+model.add(Dense(100, activation="sigmoid"))
+model.add(Dense(1, activation="sigmoid"))
 
-y_pred = model.predict()
+model.compile(loss="binary_crossentropy", optimizer="sgd")
+
+model.fit(X_train,len(y_train),epochs=10,verbose=1)
+
+y_pred = model.predict(y_test)
 print(classification_report(y_test, y_pred))
