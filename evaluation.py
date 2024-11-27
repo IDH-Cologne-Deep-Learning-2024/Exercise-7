@@ -52,11 +52,12 @@ model.add(Dense(7, activation="softmax"))
 model.compile(loss="categorical_crossentropy", optimizer="sgd")
 model.fit(
     tokenized_train_texts,
-    train_labels, epochs=5,
+    train_labels, epochs=1,
     batch_size=32,
-    validation_data=(tokenized_test_texts, test_labels)
+    validation_split=0.2
 )
 
-
-y_pred = model.predict()
-print(classification_report(y_test, y_pred))
+y_pred = model.predict(tokenized_test_texts)
+y_pred_classes = np.argmax(y_pred, axis=1)
+y_test_classes = np.argmax(test_labels, axis=1)
+print(classification_report(y_test_classes, y_pred_classes))
