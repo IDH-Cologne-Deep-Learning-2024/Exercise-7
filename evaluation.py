@@ -29,7 +29,7 @@ X_test = pad_sequences(X_test, maxlen=max_length, padding="post")
 
 FFNN = Sequential(
     [
-        Embedding(input_dim=vocab_length, output_dim=300),
+        Embedding(input_dim=vocab_length, output_dim=10),
         Flatten(),
         Dense(30, activation="relu"),
         Dense(15, activation="relu"),
@@ -53,4 +53,4 @@ y_pred = FFNN.predict(X_test)
 y_pred_classes = np.argmax(y_pred, axis=1)
 y_true = np.argmax(y_test, axis=1)
 
-print(classification_report(y_test, y_pred))
+print(classification_report(y_true, y_pred_classes, zero_division=0, digits=4))
