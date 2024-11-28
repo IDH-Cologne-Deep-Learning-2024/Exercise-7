@@ -29,7 +29,7 @@ X_test = pad_sequences(X_test, maxlen=max_length, padding="post")
 
 FFNN = Sequential(
     [
-        Embedding(input_dim=vocab_length, output_dim=10),
+        Embedding(input_dim=vocab_length, output_dim=300),
         Flatten(),
         Dense(30, activation="relu"),
         Dense(15, activation="relu"),
