@@ -10,7 +10,7 @@ from sklearn.model_selection import train_test_split
 from sklearn.metrics import classification_report, roc_auc_score
 
 df = pd.read_csv("data.tsv", sep="\t")
-df = df.head(1000)
+df = df.head(3000)
 X = df.Abstract
 y = df.DomainID
 number_classes = len(y.unique())
@@ -34,7 +34,7 @@ model.add(Flatten())
 model.add(Dense(100, activation="relu"))
 model.add(Dense(100, activation="relu"))
 model.add(Dense(number_classes, activation="softmax"))
-model.compile(loss="crossentropy", optimizer=SGD(learning_rate=0.00001))
+model.compile(loss="crossentropy", metrics=["accuracy"], optimizer=SGD(learning_rate=0.01))
 model.summary()
 model.fit(tokenized_X_train, y_train, epochs=20, verbose=1)
 
